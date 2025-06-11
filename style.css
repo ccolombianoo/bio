@@ -1,0 +1,242 @@
+/* style.css */
+/* Estilos base y animaciones para la exposición de biología del suelo */
+
+/* Fuentes y colores base */
+:root {
+  --color-primary: #16a34a;
+  --color-primary-dark: #15803d;
+  --color-secondary: #d97706;
+  --color-dark: #1c1917;
+  --color-light: #f5f5f4;
+  --color-soil-O: #8B5A2B;
+  --color-soil-A: #A0522D;
+  --color-soil-B: #CD853F;
+  --color-soil-C: #D2B48C;
+}
+
+/* Animaciones clave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes soilLayerHighlight {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+  100% { opacity: 0.7; }
+}
+
+/* Efectos de movimiento para elementos interactivos */
+.soil-layer {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: soilLayerHighlight 4s infinite ease-in-out;
+}
+
+.soil-layer:hover {
+  animation: pulse 2s infinite ease-in-out;
+  z-index: 20 !important;
+}
+
+.hotspot {
+  transition: all 0.3s ease;
+  animation: float 3s infinite ease-in-out;
+}
+
+.hotspot:hover {
+  animation: pulse 0.5s infinite ease-in-out;
+  transform: scale(1.2);
+}
+
+/* Efecto de capas de suelo en movimiento */
+.soil-visualization {
+  perspective: 1000px;
+}
+
+.soil-layer-3d {
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+
+/* Movimiento para imágenes de la galería */
+.gallery-image {
+  transition: all 0.5s ease;
+  transform-origin: center;
+}
+
+.gallery-image:hover {
+  transform: scale(1.03) rotate(1deg);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Efecto de "respiración" para elementos importantes */
+.breathing-effect {
+  animation: pulse 4s infinite ease-in-out;
+}
+
+/* Movimiento de partículas (para representar microorganismos) */
+.microorganism {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 5s infinite ease-in-out;
+}
+
+/* Efecto de agua fluyendo (para sección de humedad del suelo) */
+.water-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-flow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.2), transparent);
+  animation: waterFlow 3s infinite;
+}
+
+@keyframes waterFlow {
+  100% { left: 100%; }
+}
+
+/* Efecto de crecimiento para representar plantas */
+.plant-growth {
+  position: relative;
+}
+
+.plant-growth::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to top, var(--color-primary), #84cc16);
+  transform: translateX(-50%);
+  animation: grow 2s forwards;
+}
+
+@keyframes grow {
+  100% { height: 100%; }
+}
+
+/* Animación para transiciones entre secciones */
+.section-transition {
+  view-timeline-name: --section;
+  view-timeline-axis: block;
+  animation-timeline: --section;
+  animation-name: fadeIn;
+  animation-range: entry 25% cover 50%;
+  animation-fill-mode: both;
+}
+
+/* Efecto de descomposición de hojas */
+.leaf-decomposition {
+  position: relative;
+}
+
+.leaf-decomposition::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,50 Q50,30 70,50 Q50,70 30,50" fill="none" stroke="%2315803d" stroke-width="2"/></svg>') repeat;
+  opacity: 0;
+  animation: decompose 5s infinite alternate;
+}
+
+@keyframes decompose {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.2); }
+}
+
+/* Movimiento para organismos del suelo */
+.organism {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.organism:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+}
+
+/* Efecto de ondulación para superficies */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.4);
+  transform: scale(0);
+  animation: ripple 1s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Efecto de excavación para sección de formación del suelo */
+.digging-effect {
+  position: relative;
+}
+
+.digging-effect::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--color-soil-A);
+  animation: dig 2s forwards ease-out;
+  z-index: -1;
+}
+
+@keyframes dig {
+  100% { height: 100%; }
+}
+
+/* Media queries para optimizar animaciones en móviles */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hotspot {
+    animation: none;
+  }
+  
+  .soil-layer {
+    animation: none;
+  }
+}
