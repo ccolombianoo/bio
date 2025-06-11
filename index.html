@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exposición de Biología sobre el Suelo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Animaciones personalizadas adicionales */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Hotspots interactivos */
+        .hotspot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hotspot-dot {
+            width: 12px;
+            height: 12px;
+            background: #000000;
+            border-radius: 50%;
+        }
+        
+        .hotspot-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .hotspot:hover .hotspot-tooltip {
+            opacity: 1;
+        }
+        
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fondo terroso personalizado */
+        body {
+            background-color: #bcbcbc;
+            
+        }
+        
+        /* Tarjetas con aspecto terroso */
+        .card-soil {
+            background-color: #bcbcbc;
+            border: 1px solid #bcbcbc;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Botones con colores terrosos */
+        .btn-soil {
+            background-color: #ffffff;
+            color: white;
+        }
+        
+        .btn-soil:hover {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado con efecto parallax -->
+    <header class="relative bg-gradient-to-r from-amber-900 to-stone-800 text-white py-24 px-4 shadow-2xl overflow-hidden parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1611270632007-6d0d58d2f5e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10 animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                
+                    Exposición de Biología
+                    
+            </h1>
+            <h5 class="text-xl text-amber-100"> Kevin.L</h5>
+            
+
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mt-4 text-stone-100">
+                Una experiencia interactiva sobre el ecosistema más biodiverso del planeta
+            </p>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="sticky top-0 z-30 bg-white/90 backdrop-blur-lg shadow-md">
+        <div class="max-w-6xl mx-auto px-4">
+            <ul id="nav-sections" class="flex overflow-x-auto py-3 gap-2 scrollbar-hide">
+                <!-- Las secciones se generarán con JavaScript -->
+            </ul>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-8 px-4 relative z-10">
+        <!-- Sección Inicio -->
+        <section id="inicio" class="mb-20 scroll-mt-20 section-transition">
+            <div class="overflow-hidden border-0 shadow-xl rounded-xl card-soil">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-8">
+                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                            <i data-lucide="home" class="w-8 h-8 text-amber-700"></i>
+                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-stone-700">
+                                Introducción al Suelo
+                            </span>
+                        </h2>
+                        <div class="space-y-6 text-lg">
+                            <p class="text-stone-700">
+                                El suelo es un <span class="font-bold text-amber-700">sistema dinámico</span> donde interactúan componentes minerales, orgánicos y biológicos. Contiene más biodiversidad que toda la superficie terrestre combinada.
+                            </p>
+                            
+                            <div class="bg-gradient-to-r from-amber-50 to-stone-50 p-6 rounded-xl border border-amber-200">
+                                <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-amber-800">
+                                    <i data-lucide="activity" class="w-5 h-5"></i>
+                                    Datos Clave
+                                </h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <span class="bg-amber-100 text-amber-800 rounded-full p-1 mr-3">
+                                            <i data-lucide="gauge" class="w-4 h-4"></i>
+                                        </span>
+                                        <span><strong>Profundidad promedio:</strong> 1-2 metros</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-amber-100 text-amber-800 rounded-full p-1 mr-3">
+                                            <i data-lucide="clock" class="w-4 h-4"></i>
+                                        </span>
+                                        <span><strong>Tiempo de formación:</strong> 100-1000 años/cm</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative min-h-[400px] digging-effect">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611270632007-6d0d58d2f5e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center"></div>
+                        <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="openImageModal(1)">
+                            <h3 class="font-bold mb-2">Explorar Horizontes</h3>
+                            <p class="text-sm">Haz clic para ver en detalle</p>
+                        </div>
+                        <!-- Microorganismos animados -->
+                        <div class="microorganism" style="top: 20%; left: 15%; animation-delay: 0.5s; background-color: #8B5A2B;"></div>
+                        <div class="microorganism" style="top: 30%; left: 70%; animation-delay: 1.2s; background-color: #A0522D;"></div>
+                        <div class="microorganism" style="top: 60%; left: 40%; animation-delay: 0.8s; background-color: #CD853F;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualización 3D de capas del suelo -->
+        <section id="formacion" class="mb-20 scroll-mt-20 section-transition">
+            <div class="border-0 shadow-xl rounded-xl card-soil overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-3xl flex items-center gap-3">
+                        <i data-lucide="layers" class="w-8 h-8 text-amber-700"></i>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-stone-700">
+                            Estructura del Suelo
+                        </span>
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="soil-visualization">
+                            <div id="soil-visualization" class="relative h-64 w-full rounded-xl overflow-hidden mb-6 bg-stone-200">
+                                <!-- Las capas se generarán con JavaScript -->
+                            </div>
+                            
+                            <div id="soil-buttons" class="grid grid-cols-4 gap-2 mb-6">
+                                <!-- Los botones se generarán con JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div id="soil-info">
+                            <!-- La información se actualizará con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería Interactiva -->
+        <section id="componentes" class="mb-20 scroll-mt-20 section-transition">
+            <div class="border-0 shadow-xl rounded-xl card-soil overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-3xl flex items-center gap-3">
+                        <i data-lucide="leaf" class="w-8 h-8 text-amber-700"></i>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-stone-700">
+                            Galería Interactiva
+                        </span>
+                    </h2>
+                    <p class="mt-2 text-stone-600">Explora los detalles con zoom interactivo</p>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6" id="gallery">
+                        <!-- Las imágenes se generarán con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Imagen -->
+    <div id="image-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+            <div id="modal-content">
+                <!-- El contenido se generará con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-b from-stone-800 to-stone-900 text-white py-12 px-4 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80')] bg-cover bg-center opacity-10"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                        
+                    </h3>
+                    <p>Proyecto para biologia</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Mario Goat</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <span>Apruebame porfa</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <span>💯</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Créditos</h3>
+                    <p>Desarrollado por Kevin</p>
+                    <p class="mt-4">© <span id="current-year"></span> - Todos los derechos reservados</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-6 border-t border-stone-700 text-center">
+                <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="px-4 py-2 border border-white/30 rounded-full text-white hover:bg-white/10 transition-colors">
+                    Volver al inicio
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar iconos Lucide
+        lucide.createIcons();
+        
+        // Datos para la aplicación
+        const appData = {
+            sections: [
+                { id: 'inicio', title: 'Inicio', icon: 'home' },
+                { id: 'formacion', title: 'Formación', icon: 'layers' },
+                { id: 'componentes', title: 'Componentes', icon: 'droplet' }
+            ],
+            soilLayers: [
+                { name: "Horizonte O", color: "#8B5A2B", depth: "0-5 cm", composition: "Materia orgánica no descompuesta" },
+                { name: "Horizonte A", color: "#A0522D", depth: "5-30 cm", composition: "Humus y minerales" },
+                { name: "Horizonte B", color: "#CD853F", depth: "30-100 cm", composition: "Acumulación de arcillas" },
+                { name: "Horizonte C", color: "#D2B48C", depth: "100-200 cm", composition: "Roca madre meteorizada" }
+            ],
+            galleryImages: [
+                {
+                    id: 1,
+                    src: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80",
+                    title: "Horizontes del Suelo",
+                    description: "Los horizontes del suelo (O, A, E, B, C y R) representan capas con características distintas. El horizonte O contiene materia orgánica no descompuesta, mientras que el A es rico en humus. Los horizontes inferiores muestran la transición a la roca madre.",
+                    hotspots: [
+                        { x: 30, y: 15, info: "Horizonte O: Materia orgánica no descompuesta" },
+                        { x: 30, y: 35, info: "Horizonte A: Rico en humus y vida microbiana" },
+                        { x: 30, y: 60, info: "Horizonte B: Acumulación de minerales" }
+                    ]
+                },
+                {
+                    id: 2,
+                    src: "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.C-cKO-HMGse4qXCHcPA7bAHaEK%26pid%3DApi&sp=1749643873T2f92af08da0badae625e4b9f321831d1877fd60b149f718c863deb2d472c8e3f",
+                    title: "Macrofauna Edáfica",
+                    description: "Organismos como lombrices, hormigas y escarabajos modifican la estructura del suelo. Una lombriz puede procesar hasta 30 toneladas de tierra por hectárea al año, creando canales que mejoran la infiltración del agua y la aireación.",
+                    hotspots: [
+                        { x: 50, y: 50, info: "Lombriz de tierra: Ingeniera del ecosistema" },
+                        { x: 70, y: 30, info: "Túneles: Mejoran la aireación" }
+                    ]
+                },
+                {
+                    id: 3,
+                    src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbiocontrolplant.com%2Fwp-content%2Fuploads%2F2023%2F02%2F2-1.jpg&f=1&nofb=1&ipt=3f783b40d6d333fac44cb27773752529da95b6dc8376a0eee68f8cf267335bd3",
+                    title: "Biodiversidad del Suelo",
+                    description: "El suelo alberga una increíble diversidad de organismos, desde bacterias microscópicas hasta pequeños mamíferos. Esta red trófica subterránea es esencial para la fertilidad del suelo.",
+                    hotspots: [
+                        { x: 40, y: 40, info: "Hongo micorrízico: Asociación con raíces" },
+                        { x: 60, y: 70, info: "Colémbolo: Descomponedor clave" }
+                    ]
+                },
+                {
+                    id: 4,
+                    src: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                    title: "Raíces y Suelo",
+                    description: "Las raíces de las plantas interactúan íntimamente con el suelo, liberando exudados que alimentan a los microorganismos y creando microhábitats para la fauna edáfica.",
+                    hotspots: [
+                        { x: 30, y: 60, info: "Pelos radicales: Absorción de nutrientes" },
+                        { x: 70, y: 40, info: "Rizosfera: Zona de intensa actividad biológica" }
+                    ]
+                }
+            ]
+        };
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar año actual
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Generar navegación
+            const navContainer = document.getElementById('nav-sections');
+            appData.sections.forEach(section => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button onclick="scrollToSection('${section.id}')" 
+                        class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-amber-50 transition-colors">
+                        <i data-lucide="${section.icon}" class="w-5 h-5"></i>
+                        <span>${section.title}</span>
+                    </button>
+                `;
+                navContainer.appendChild(li);
+            });
+            
+            // Generar visualización del suelo
+            initSoilVisualization();
+            
+            // Generar galería
+            initGallery();
+            
+            // Volver a cargar iconos (necesario para los dinámicos)
+            lucide.createIcons();
+
+            // Animación al desplazarse
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Funciones de la aplicación
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            
+            // Actualizar navegación activa
+            appData.sections.forEach(section => {
+                const btn = document.querySelector(`button[onclick="scrollToSection('${section.id}')"]`);
+                if (section.id === sectionId) {
+                    btn.classList.add('bg-amber-600', 'text-white');
+                    btn.classList.remove('bg-white/10');
+                } else {
+                    btn.classList.remove('bg-amber-600', 'text-white');
+                    btn.classList.add('bg-white/10');
+                }
+            });
+        }
+
+        function initSoilVisualization() {
+            const container = document.getElementById('soil-visualization');
+            const buttonsContainer = document.getElementById('soil-buttons');
+            const infoContainer = document.getElementById('soil-info');
+            
+            // Crear capas
+            appData.soilLayers.forEach((layer, index) => {
+                // Capa visual
+                const layerDiv = document.createElement('div');
+                layerDiv.className = `absolute left-0 right-0 border border-stone-300 soil-layer ${index === 0 ? 'z-10' : 'z-0'}`;
+                layerDiv.style.bottom = `${index * 60}px`;
+                layerDiv.style.height = index === 0 ? '80px' : '60px';
+                layerDiv.style.backgroundColor = layer.color;
+                layerDiv.style.opacity = index === 0 ? 1 : 0.7 - (0 - index) * 0.2;
+                layerDiv.dataset.index = index;
+                container.appendChild(layerDiv);
+                
+                // Botón
+                const btn = document.createElement('button');
+                btn.className = `flex flex-col items-center justify-center h-20 ${index === 0 ? 'bg-amber-600 text-white' : 'bg-white border'}`;
+                btn.innerHTML = `<span class="text-xs font-bold">${layer.name}</span>`;
+                btn.onclick = () => setSoilLayer(index);
+                buttonsContainer.appendChild(btn);
+            });
+            
+            // Actualizar información
+            updateSoilInfo(0);
+        }
+
+        function setSoilLayer(index) {
+            const layers = document.querySelectorAll('#soil-visualization .soil-layer');
+            const buttons = document.querySelectorAll('#soil-buttons button');
+            
+            layers.forEach((layer, i) => {
+                layer.style.height = i === index ? '80px' : '60px';
+                layer.style.opacity = i === index ? 1 : 0.7 - Math.abs(index - i) * 0.2;
+            });
+            
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('bg-amber-600', 'text-white');
+                    btn.classList.remove('bg-white', 'border');
+                } else {
+                    btn.classList.remove('bg-amber-600', 'text-white');
+                    btn.classList.add('bg-white', 'border');
+                }
+            });
+            
+            updateSoilInfo(index);
+        }
+
+        function updateSoilInfo(index) {
+            const layer = appData.soilLayers[index];
+            const container = document.getElementById('soil-info');
+            
+            container.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${layer.name}</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-amber-100 text-amber-800 rounded-full p-1 mt-1">
+                            <i data-lucide="gauge" class="w-4 h-4"></i>
+                        </span>
+                        <div>
+                            <h4 class="font-semibold">Profundidad</h4>
+                            <p>${layer.depth}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="bg-amber-100 text-amber-800 rounded-full p-1 mt-1">
+                            <i data-lucide="activity" class="w-4 h-4"></i>
+                        </span>
+                        <div>
+                            <h4 class="font-semibold">Composición</h4>
+                            <p>${layer.composition}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            lucide.createIcons();
+        }
+
+        function initGallery() {
+            const container = document.getElementById('gallery');
+            
+            appData.galleryImages.forEach(image => {
+                const item = document.createElement('div');
+                item.className = 'relative group cursor-pointer gallery-image';
+                item.innerHTML = `
+                    <div class="overflow-hidden h-full rounded-lg border border-stone-300">
+                        <img src="${image.src}" alt="${image.title}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-stone-800">${image.title}</h3>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                        <button class="px-4 py-2 bg-white rounded-lg flex items-center" onclick="openImageModal(${image.id})">
+                            <i data-lucide="arrow-right" class="w-4 h-4 mr-2"></i>
+                            Explorar
+                        </button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            lucide.createIcons();
+        }
+
+        function openImageModal(imageId) {
+            const image = appData.galleryImages.find(img => img.id === imageId);
+            const modal = document.getElementById('image-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <div class="relative">
+                    <img src="${image.src}" alt="${image.title}" class="w-full h-64 md:h-96 object-cover">
+                    
+                    ${image.hotspots.map(hotspot => `
+                        <div class="hotspot" style="left: ${hotspot.x}%; top: ${hotspot.y}%;">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-tooltip">${hotspot.info}</div>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold">${image.title}</h3>
+                            <button onclick="closeModal()" class="p-1 rounded-full hover:bg-gray-100">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                        <p class="text-lg mb-6">${image.description}</p>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Hacer las funciones accesibles globalmente
+        window.scrollToSection = scrollToSection;
+        window.openImageModal = openImageModal;
+        window.closeModal = closeModal;
+        window.setSoilLayer = setSoilLayer;
+    </script>
+</body>
+</html>
